@@ -9,7 +9,7 @@ const onLoad = (() => {
     el: document.querySelector('#edit-area'),
     initialEditType: 'markdown',
     previewStyle: 'vertical',
-    height: '500px',
+    height: 'auto',
   });
 
   window.addEventListener('resize', () => {
