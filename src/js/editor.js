@@ -1,17 +1,22 @@
+require('tui-editor/dist/tui-editor-extScrollSync.js');
+
 const tuiEditor = require('tui-editor');
 const ipc = require('electron').ipcRenderer;
 
 const openFileButton = document.getElementById('open-file');
 const saveFileButton = document.getElementById('save-file');
 
-const offset = 20;
+const offset = 30;
 
 const onLoad = (() => {
+  const editArea = document.getElementById('edit-area');
+  editAreaTop = editArea.getBoundingClientRect().top;
   const editor = new tuiEditor({
     el: document.querySelector('#edit-area'),
     initialEditType: 'markdown',
     previewStyle: 'vertical',
-    height: 'auto',
+    height: window.innerHeight - editAreaTop - offset,
+    exts: ['scrollSync'],
   });
 
   window.addEventListener('resize', () => {
