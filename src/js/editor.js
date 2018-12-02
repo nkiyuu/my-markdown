@@ -1,6 +1,8 @@
 const tuiEditor = require('tui-editor');
 const ipc = require('electron').ipcRenderer;
+
 const openFileButton = document.getElementById('open-file');
+const saveFileButton = document.getElementById('save-file');
 
 const offset = 20;
 
@@ -24,6 +26,10 @@ const onLoad = (() => {
   
   ipc.on('selected-file', (event, content) => {
     editor.setValue(content);
+  });
+
+  saveFileButton.addEventListener('click', () => {
+    ipc.send('save-file-dialog', editor.getValue());
   });
 });
 

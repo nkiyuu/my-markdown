@@ -55,3 +55,12 @@ ipc.on('open-file-dialog', (event) => {
     });
   });
 });
+
+ipc.on('save-file-dialog', (event, data) => {
+    const options = {
+      title: 'ファイルを保存',
+    }
+    dialog.showSaveDialog(options, (file) => {
+      fs.writeFileSync(file, data);
+    });
+  });
