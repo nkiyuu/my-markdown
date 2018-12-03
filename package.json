@@ -22,6 +22,7 @@
     "eslint": "^5.9.0"
   },
   "dependencies": {
+    "mousetrap": "^1.6.2",
     "tui-editor": "^1.2.7"
   }
 }

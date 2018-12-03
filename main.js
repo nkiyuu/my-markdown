@@ -5,6 +5,7 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const ipc = electron.ipcMain;
 const dialog = electron.dialog;
+const globalShortcut = electron.globalShortcut;
 
 let win = null;
 
@@ -38,7 +39,7 @@ app.on('activate', () => {
   }
 });
 
-ipc.on('open-file-dialog', (event) => {
+const openFile = (event) => {
   dialog.showOpenDialog({
     properties: ['openFile']
   }, function(file) {
@@ -54,13 +55,16 @@ ipc.on('open-file-dialog', (event) => {
       event.sender.send('selected-file', data);
     });
   });
-});
+}
 
-ipc.on('save-file-dialog', (event, data) => {
-    const options = {
-      title: 'ファイルを保存',
-    }
-    dialog.showSaveDialog(options, (file) => {
-      fs.writeFileSync(file, data);
-    });
+const saveFile = (event, data) => {
+  const options = {
+    title: 'ファイルを保存',
+  }
+  dialog.showSaveDialog(options, (file) => {
+    fs.writeFileSync(file, data);
   });
+}
+
+ipc.on('open-file-dialog', openFile);
+ipc.on('save-file-dialog', saveFile);
