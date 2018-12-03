@@ -28,10 +28,6 @@ const onLoad = (() => {
   ipc.on('selected-file', (event, content) => {
     editor.setValue(content);
   });
-
-  saveFileButton.addEventListener('click', () => {
-    ipc.send('save-file-dialog', editor.getValue());
-  });
 });
 
 mouseTrap.bind('command+o', () => {
