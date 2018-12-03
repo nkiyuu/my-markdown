@@ -25,10 +25,6 @@ const onLoad = (() => {
     editor.height(window.innerHeight - editAreaTop - offset);
   });
 
-  openFileButton.addEventListener('click', () => {
-    ipc.send('open-file-dialog')
-  });
-  
   ipc.on('selected-file', (event, content) => {
     editor.setValue(content);
   });
