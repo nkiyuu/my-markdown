@@ -28,6 +28,13 @@ const onLoad = (() => {
   ipc.on('selected-file', (event, content) => {
     editor.setValue(content);
   });
+
+  const searchTextArea = document.getElementById('search-text-area');
+  searchTextArea.addEventListener('keydown', (event) => {
+    if (event.code === 'Enter') {
+      ipc.send('search-text', searchTextArea.value);
+    }
+  });
 });
 
 mouseTrap.bind('command+o', () => {

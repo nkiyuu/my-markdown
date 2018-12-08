@@ -22,6 +22,10 @@ const createWindow = (() => {
   win.on('closed', () => {
     win = null; 
   });
+
+  win.webContents.on('found-in-page', (event, result) => {
+
+  });
 });
 
 app.on('ready', createWindow);
@@ -68,3 +72,9 @@ const saveFile = (event, data) => {
 
 ipc.on('open-file-dialog', openFile);
 ipc.on('save-file-dialog', saveFile);
+
+const search = (event, text) => {
+  win.webContents.findInPage(text);
+}
+
+ipc.on('search-text', search);
